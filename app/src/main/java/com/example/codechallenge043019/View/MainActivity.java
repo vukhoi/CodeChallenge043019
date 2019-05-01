@@ -17,6 +17,8 @@ import com.example.codechallenge043019.ViewModel.CustomViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = this.getClass().getSimpleName();
@@ -57,6 +59,17 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                Log.d(TAG, "10 minutes update");
+                displayMovies(stdMovieList, null);
+            }
+        };
+        timer.schedule(timerTask, 0 , 600000);
+
     }
 
     public void displayMovies(List<Movie> movies, String searchString) {
